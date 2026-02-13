@@ -1,0 +1,251 @@
+:root {
+  --ink: #1c1a17;
+  --muted: #5d5851;
+  --surface: rgba(255, 255, 255, 0.86);
+  --surface-strong: rgba(255, 255, 255, 0.96);
+  --accent: #d46f2c;
+  --accent-dark: #b85a20;
+  --accent-2: #2e6f8f;
+  --border: #d7c7b4;
+  --shadow: 0 18px 40px rgba(34, 29, 22, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Avenir Next", "Avenir", "Futura", "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, #f7e7d2, transparent 45%),
+    radial-gradient(circle at 70% 20%, #d7ecf4, transparent 40%),
+    linear-gradient(160deg, #f3efe9 0%, #f8f6f3 40%, #efe8de 100%);
+}
+
+.app {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 20px 80px;
+  display: grid;
+  gap: 28px;
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2.2rem, 3vw, 3rem);
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+
+.stats {
+  display: grid;
+  gap: 12px;
+}
+
+.stat {
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.stat-value {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.panel {
+  background: var(--surface-strong);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  font-weight: 600;
+}
+
+input {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+  background: #fffaf4;
+  color: var(--ink);
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(212, 111, 44, 0.2);
+}
+
+.help {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.error {
+  margin: 8px 0 0;
+  color: #9b2c1f;
+  font-weight: 600;
+}
+
+.status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+button {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #f2e6d7;
+  color: var(--ink);
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.08);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.primary {
+  background: var(--accent);
+  color: #fffaf4;
+}
+
+.primary:hover {
+  background: var(--accent-dark);
+}
+
+.danger {
+  background: #f4d6d0;
+  color: #7b2014;
+}
+
+.list {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(140px, 2fr) auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: #fffaf4;
+  animation: rise 0.3s ease;
+}
+
+.row-id {
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.row input {
+  width: 100%;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.row-error {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #9b2c1f;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.empty {
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px dashed var(--border);
+  color: var(--muted);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .row-actions {
+    justify-content: flex-start;
+  }
+}
