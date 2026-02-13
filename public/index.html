@@ -22,17 +22,17 @@
       <header class="hero">
         <div>
           <p class="eyebrow">CRUD protegido</p>
-          <h1>  ·  </h1>
+
           <p class="subtitle">Crea, edita y elimina registros en tiempo real.</p>
         </div>
         <div class="stats">
           <div class="stat">
             <span class="stat-label">Campo</span>
-            <span class="stat-value"> </span>
+            <span class="stat-value"></span>
           </div>
           <div class="stat">
             <span class="stat-label">Regla</span>
-            <span class="stat-value">1-10 digitos</span>
+            <span class="stat-value">max 2147483647</span>
           </div>
         </div>
       </header>
@@ -55,7 +55,9 @@
               required
             />
           </label>
-          <p id="create-help" class="help">Solo numeros, hasta 10 digitos.</p>
+          <p id="create-help" class="help">
+            Solo numeros, maximo 2147483647.
+          </p>
           <p id="create-error" class="error" role="alert"></p>
           <button type="submit" class="primary">Crear</button>
         </form>

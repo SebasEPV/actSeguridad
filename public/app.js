@@ -10,6 +10,7 @@ if (window.__alfajorAppInitialized) {
     const TABLE = "alfajor";
 
     const MAX_DIGITS = 10;
+    const MAX_VALUE = 2147483647;
     const DIGITS_RE = /^\d{1,10}$/;
 
     const createForm = document.getElementById("create-form");
@@ -39,6 +40,9 @@ if (window.__alfajorAppInitialized) {
     const validateDigits = (value) => {
       if (!value) return "lechuga requerida";
       if (!DIGITS_RE.test(value)) return "solo numeros, max 10 digitos";
+      const numeric = Number(value);
+      if (!Number.isSafeInteger(numeric)) return "lechuga invalida";
+      if (numeric > MAX_VALUE) return "maximo permitido: 2147483647";
       return "";
     };
 
@@ -56,8 +60,31 @@ if (window.__alfajorAppInitialized) {
       }
     );
 
+    const normalizeSupabaseError = (error) => {
+      if (!error) return "error inesperado";
+      const message = String(error.message || "");
+      const details = String(error.details || "");
+      const combined = `${message} ${details}`.toLowerCase();
+
+      if (error.code === "22003" || combined.includes("out of range")) {
+        return "lechuga fuera de rango (max 10 digitos)";
+      }
+      if (error.code === "23514" || combined.includes("check constraint")) {
+        return "lechuga fuera de rango";
+      }
+      if (error.code === "22P02" || combined.includes("invalid input")) {
+        return "lechuga invalida";
+      }
+      if (error.code === "42501" || combined.includes("permission")) {
+        return "permiso denegado";
+      }
+      return message || "error inesperado";
+    };
+
     const ensureOk = (result) => {
-      if (result.error) throw new Error(result.error.message);
+      if (result.error) {
+        throw new Error(normalizeSupabaseError(result.error));
+      }
       return result.data;
     };
 
